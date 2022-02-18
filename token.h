@@ -10,3 +10,10 @@ struct token {
   string;   // characters in token
   int;      // line number
 }
+
+
+const vector<std::string> keyword{"Again", "If", "Assign", "Move", "Show",
+                                  "Flip", "Name", "Home", "Do", "Spot",
+                                  "Place", "Here", "There"};
+const vector<std::string> operator{"&", "+", "/", "%", ".", "{", "}", "<", "-"};
+const vector<std::string> comment{"*"};
