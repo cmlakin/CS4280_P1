@@ -1,10 +1,10 @@
 
 // enum is going to return a value
-enum tokenId {EOF_tk, ID_tk, KW_tk, NUM_tk, OP_tk, CMT_tk, ERROR_tk}
+enum tokenId {EOF_tk, ID_tk, KW_tk, NUM_tk, OP_tk, CMT_tk, ERROR_tk};
 
 // tokenNames[EOF_tk] -> this will print EOF
 string tokenNames[] = {"EOF", "Identifier", "Keyword", "Number", "Operator",
-                        "Comment", "Error"}
+                        "Comment", "Error"};
 
 struct token {
   tokenID;  // type of token
@@ -39,4 +39,4 @@ const int Table[statesRow][tokensCol] = { {1, 3, 4, 5, -1, 6, 7, 1000},
                                           {-1, -1, -1, 4, 4, -1, -1, -1},
                                           {1003, 1003, 1003, 1003, 1003, 6, 1003, 1003},
                                           {7, 7, 7, 7, 7, 7, 8, -1},
-                                          {1005, 1005, 1005, 1005, 1005, 1005, 1005, 1005}}
+                                          {1005, 1005, 1005, 1005, 1005, 1005, 1005, 1005}};
