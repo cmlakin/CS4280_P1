@@ -25,28 +25,14 @@ int main(int argc, char * argv[]) {
     filenameIn = argv[1];
 
     inFile.open(filenameIn);
-    scan(inFile);
+    testScanner(inFile);
     inFile.close();
   }
   else {
-    scan(cin);
+    testScanner(cin);
   }
 
   return 0;
 }
 
 // scan file for content
-
-void scan(istream& in) {
-  string element;
-  in >> element;
-  if (in.eof()) {
-    cout << "Error: Empty file, no content.\n";
-    cout << "Exiting program.\n";
-  }
-  while(!in.eof()) {
-
-    char first = element.front();
-    in >> userWord;
-  }
-}
