@@ -1,15 +1,15 @@
 
 // enum is going to return a value
-enum tokenId {EOF_tk, ID_tk, KW_tk, NUM_tk, OP_tk, CMT_tk, ERROR_tk};
+enum tokenId {KW_tk, ID_tk, EOF_tk, NUM_tk, OP_tk, CMT_tk};
 
 // tokenNames[EOF_tk] -> this will print EOF
-string tokenNames[] = {"EOF", "Identifier", "Keyword", "Number", "Operator",
-                        "Comment", "Error"};
+string tokenNames[] = {"Keyword", "Identifier", "EOF", "Number", "Operator",
+                        "Comment"};
 
 struct token {
-  tokenID;  // type of token
-  string;   // characters in token
-  int;      // line number
+  tokenId tokenID;  // type of token
+  string chars;   // characters in token
+  int line;      // line number
 }
 
 
