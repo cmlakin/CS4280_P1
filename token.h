@@ -1,7 +1,8 @@
 #ifndef TOKEN_h
 #define TOKEN_h
 // enum is going to return a value
-enum tokenId {KW_tk, ID_tk, EOF_tk, NUM_tk, OP_tk, CMT_tk};
+enum tokenId {KW_tk = 1000, ID_tk = 1001, EOF_tk = 1002, NUM_tk = 1003,
+              OP_tk = 1004, CMT_tk = 1005};
 
 // tokenNames[EOF_tk] -> this will print EOF
 string tokenNames[] = {"Keyword", "Identifier", "EOF", "Number", "Operator",
@@ -23,4 +24,4 @@ const vector<std::string> operator3{"-"};
 const vector<std::string> comment{"*"};
 
 
-#endif 
+#endif
