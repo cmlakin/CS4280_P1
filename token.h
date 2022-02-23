@@ -1,5 +1,4 @@
-#ifndef TOKEN_h
-#define TOKEN_h
+
 // enum is going to return a value
 enum tokenId {KW_tk, ID_tk, EOF_tk, NUM_tk, OP_tk, CMT_tk};
 
@@ -21,6 +20,3 @@ const vector<std::string> operator1{"&", "+", "/", "%", ".", "{", "}"};
 const vector<std::string> operator2{"<"};
 const vector<std::string> operator3{"-"};
 const vector<std::string> comment{"*"};
-
-
-#endif 
