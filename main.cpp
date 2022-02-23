@@ -11,15 +11,15 @@
 #include <string>
 #include <fstream>
 #include <type_traits>
-#include "testScanner.h"
 
-using namespace std;
 
 int main(int argc, char * argv[]) {
 
   char* filenameIn;
   ifstream inFile;
-  
+  ofstream outFile;
+  string userWord;
+
   // parse commandline arguements
   if (argc == 2) {
     filenameIn = argv[1];
@@ -28,9 +28,9 @@ int main(int argc, char * argv[]) {
     testScanner(inFile);
     inFile.close();
   }
-  // else {
-  //   testScanner(cin);
-  // }
+  else {
+    testScanner(cin);
+  }
 
   return 0;
 }
