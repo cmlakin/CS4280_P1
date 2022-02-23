@@ -2,7 +2,7 @@
 
 CC = g++
 CFLAGS = -g -Wall -std=c++11
-OBJS = main.o testScanner.o scanner.h
+OBJS = main.o testScanner.o scanner.o
 TARGET = P1
 
 P1: $(OBJS)

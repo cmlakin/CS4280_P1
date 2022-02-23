@@ -1,29 +1,27 @@
 // scan in and return one token
-#include <iostream>
-#include <stdlib.h>
-#include <string>
+
 #include "scanner.h"
 
-using namespace std;
+
 
 // declare FSA table here
-cosnt int statesRow = 9;
-cosnt int tokensCol = 8;
-const int Table[statesRow][tokensCol];
-//string variable
-static string fileString;
-// nextChar variable
-static char nextChar;
-static char peek; // use this to look at the upcoming nextChar
-static int lineN;
+
+// //string variable
+// static string fileString;
+// // nextChar variable
+// static char nextChar;
+//  // use this to look at the upcoming nextChar
+// static int lineN;
 
 // pass 2 arguemnts - string and line number
-void scanner(string& fileString, int lineN)  {
+void scanner(const string& fileString, int lineN)  {
 
     // store string and call getchar();
     string chars = fileString;
     cout << lineN << " " << chars << endl;
-
+    // const int statesRow = 9;
+    // const int tokensCol = 8;
+    // int table[statesRow][tokensCol];
 
   // initialize FSA table here
   // Table[statesRow][tokensCol] = { {1, 3, 4, 5, -1, 6, 7, 1000},
@@ -90,7 +88,7 @@ void scanner(string& fileString, int lineN)  {
 //   string s = NULL;
 //
 //   while (state != FINAL) {
-//     nextState = Table[state][nextChar];
+//     nextState = table[state][nextChar];
 //     if (nextState == Error) {
 //       Error(); // report error and exit
 //     }
