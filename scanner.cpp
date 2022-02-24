@@ -19,7 +19,9 @@ void scanner(const string& fileString, int lineN)  {
 
   string chars = fileString;
   cout << lineN << " " << chars << endl;
-  while(!chars.empty()) {
+  while(chars.length() > 1) {
+    cout << "***in scanner string = " << chars << endl;
+    cout << "***char.length() = " << chars.length() << endl;
     getChar(chars, lineN);
   }
 
@@ -68,7 +70,6 @@ void scanner(const string& fileString, int lineN)  {
 // site for string.at() https://www.geeksforgeeks.org/string-at-in-cpp/
 // stie for string.end() https://www.javatpoint.com/cpp-string-end-function
 void getChar(string& s, int lineN) {
-  cout << "string = " << s << endl;
   // parse string for nextChar
   nextChar = s.at(0);
   cout << "nextChar = " << nextChar << endl;
