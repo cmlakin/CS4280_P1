@@ -16,7 +16,7 @@ using namespace std;
 // #define ERR -1;
 
 void scanner(const string&, int);
-// char getChar(string, int);
+void getChar(string&, int);
 // tokenType FSDriver();
 
 #endif

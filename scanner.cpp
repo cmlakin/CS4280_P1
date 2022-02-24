@@ -8,16 +8,22 @@
 // const int table[statesRow][tokensCol];
 // string variable
 // static string fileString;
-// // nextChar variable
-// static char nextChar;
+// nextChar variable
+static char nextChar;
+static char lookAhead;
 // // use this to look at the upcoming nextChar
 // static int lineN;
 
 // pass 2 arguemnts - string and line number
 void scanner(const string& fileString, int lineN)  {
-  
+
   string chars = fileString;
   cout << lineN << " " << chars << endl;
+  while(chars.length() > 1) {
+    cout << "***in scanner string = " << chars << endl;
+    cout << "***char.length() = " << chars.length() << endl;
+    getChar(chars, lineN);
+  }
 
   // initialize FSA table here
   // table[statesRow][tokensCol] = { {1, 3, 4, 5, -1, 6, 7, 1000},
@@ -63,18 +69,25 @@ void scanner(const string& fileString, int lineN)  {
 
 // site for string.at() https://www.geeksforgeeks.org/string-at-in-cpp/
 // stie for string.end() https://www.javatpoint.com/cpp-string-end-function
-// char getChar(string s, int lineN) {
-//   string s;
-//   int lNum, i;
-//   // parse string for nextChar
-//   nextChar = s.at(0);
-//   peek = s.at(1);
-//   // if end of string - return null
-//   if(s = str.end()){
-//     s = NULL;
-//     return s;
-//   }
-// }
+void getChar(string& s, int lineN) {
+  // parse string for nextChar
+  nextChar = s.at(0);
+  cout << "nextChar = " << nextChar << endl;
+  lookAhead = s.at(1);
+  cout << "lookAhead = " << lookAhead << endl;
+
+  s.erase(0, 1);
+  cout << "string = " << s << endl;
+
+  // if(s.end()){
+  //   // do something here
+  //   cout << "end of string\n";
+  //   return;
+  // }
+  // else {
+  //
+  // }
+}
 
 // tokenType FSDriver() // assume nextChar set, and used as column index
 // {
