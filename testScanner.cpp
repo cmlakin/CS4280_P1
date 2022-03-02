@@ -1,10 +1,12 @@
 // call scanner and  print  token until scaner returns EOF
+#include "token.h"
 #include "scanner.h"
 #include "testScanner.h"
 
 using namespace std;
 
 void testScanner(istream& in) {
+  Token token;
   string fileLine;
   int lineNum = 0;
   // create a variable to store token sent back from scanner
@@ -19,10 +21,11 @@ void testScanner(istream& in) {
 
     while(getline(in, fileLine)) {
       lineNum++;
+      token.line = lineNum;
       // not sure if I should do this here, or if it should be done below
 
       // pass line and line number to scanner
-      scanner(fileLine, lineNum);
+      scanner(fileLine, token);
       //scanner returns token info - print info
       //check if line is empty or not
       // if (fileLine.empty()){

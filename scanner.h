@@ -4,6 +4,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <string>
+#include "token.h"
 
 using namespace std;
 
@@ -15,8 +16,9 @@ using namespace std;
 // #define CMT 1005;
 // #define ERR -1;
 
-void scanner(const string&, int);
-void getChar(string&, int);
+void scanner(const string&, Token);
+void getChar(string&);
+void getCol(char, char);
 // tokenType FSDriver();
 
 #endif
