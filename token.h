@@ -10,8 +10,8 @@ enum tokenId {KW_tk = 1000, ID_tk = 1001, EOF_tk = 1002, NUM_tk = 1003,
               OP_tk = 1004, CMT_tk = 1005};
 
 // tokenNames[EOF_tk] -> this will print EOF
-string tokenNames[] = {"Keyword", "Identifier", "EOF", "Number", "Operator",
-                        "Comment"};
+extern string tokenNames[];
+
 
 struct Token {
   tokenId tokenID;  // type of token
@@ -21,12 +21,12 @@ struct Token {
 
 
 static std::string keyword[] = {"Again", "If", "Assign", "Move", "Show",
-                         "Flip", "Name", "Home", "Do", "Spot",
-                         "Place", "Here", "There"};
+                                "Flip", "Name", "Home", "Do", "Spot",
+                                "Place", "Here", "There"};
 static std::string operator1[] = {"&", "+", "/", "%", ".", "{", "}"};
-static std::string operator2{"<"};
-static std::string operator3{"-"};
-static std::string comment{"*"};
+static char operator2 = '<';
+static char operator3 = '-';
+static char comment = '*';
 
 
 #endif

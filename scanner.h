@@ -16,9 +16,10 @@ using namespace std;
 // #define CMT 1005;
 // #define ERR -1;
 
-void scanner(const string&, Token);
-void getChar(string&);
-void getCol(char, char);
-// tokenType FSDriver();
+Token scanner(const string&, int);
+char look(string&);
+char getChar(string&);
+int getCol(char&);
+Token FSDriver(const string&, int);
 
 #endif

@@ -11,7 +11,7 @@ P1: $(OBJS)
 main.o: main.cpp testScanner.h scanner.h token.h
 	$(CC) $(CFLAGS) -c main.cpp
 
-scanner.o: scanner.cpp scanner.h
+scanner.o: scanner.cpp scanner.h token.h
 	$(CC) $(CFLAGS) -c scanner.cpp
 
 testScanner.o: testScanner.cpp testScanner.h
