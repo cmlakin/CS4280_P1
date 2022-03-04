@@ -105,29 +105,31 @@ int getCol(char currentChar){
 
 }
 
-Token FSDriver(const string& fileString, int line) // assume nextChar set, and used as column index
+Token FSDriver(string& fileString, int line) // assume nextChar set, and used as column index
 {
   // state_t state = INITIAL; // (0 = S1 here)
   // state_t nextState;
-  int state = INITIAL; // (0 = S1 here)
+  int state = 0; //INITIAL; // (0 = S1 here)
   int nextState;
   Token token;
   string s = NULL;
+  char nextChar = '\0';
+  int fsaCol = 0;
 
-  while (state != FINAL) {
+  while (state == 0) {
 
-    char nextChar = look(fileString);
-    int fsaCol = getCol(nextChar);
+    nextChar = look(fileString);
+    fsaCol = getCol(nextChar);
     nextState = table[state][fsaCol];
-    if (nextState == Error) {
-      Error(); // report error and exit
+    if (nextState == -5) {
+      //Error(); // report error and exit
     }
-    if (nextState == FINAL) { // put switch here instead of if statement
-      if (token(state) < 0){
+    if (nextState != 0) { // put switch here instead of if statement
+      if (tokenId(state) < 0){
         //error
         cout << "Error: " << state << endl;
       }
-      else if (token(state) == KW_tk) { // need reserved keyword loop
+      else if (tokenId(state) == KW_tk) { // need reserved keyword loop
         // if (S in Keywords){
         //   return (KW_tk, S); // or specific keyword
         // }
@@ -136,16 +138,16 @@ Token FSDriver(const string& fileString, int line) // assume nextChar set, and u
         // }
         cout << "KW_TK\n";
       }
-      else if (token(state) >= ID_tk && token(state) <= CMT_tk){
+      else if (tokenId(state) >= ID_tk && tokenId(state) <= CMT_tk){
         // return which token type and string
         cout << "ID - CMT token\n";
       }
       // add additional states
       else {  // not FINAL  // this would be the default statement in switch
-        token->line = line;
+        token.line = line;
         state = nextState;
         char addChar = getChar(fileString);
-        append(s, addChar);
+        s.append(addChar, 1);
         nextChar = look(fileString); // something to see if finished with line
       }
     }

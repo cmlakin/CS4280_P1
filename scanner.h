@@ -14,12 +14,14 @@ using namespace std;
 // #define NUM 1003;
 // #define OP 1004;
 // #define CMT 1005;
-// #define ERR -1;
+#define ERR -1;
+#define INITIAL 0;
+#define FINAL EOF;
 
 Token scanner(const string&, int);
 char look(string&);
 char getChar(string&);
-int getCol(char&);
+int getCol(char);
 Token FSDriver(const string&, int);
 
 #endif
