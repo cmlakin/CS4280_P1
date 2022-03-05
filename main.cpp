@@ -16,7 +16,7 @@
 using namespace std;
 
 int main(int argc, char * argv[]) {
-
+  cout << "*** in main\n";
   char* filenameIn;
   ifstream inFile;
 

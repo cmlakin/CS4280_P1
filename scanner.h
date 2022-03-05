@@ -4,6 +4,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <string>
+#include <cctype>
 #include "token.h"
 
 using namespace std;
@@ -16,12 +17,13 @@ using namespace std;
 // #define CMT 1005;
 #define ERR -1;
 #define INITIAL 0;
-#define FINAL EOF;
+#define FINAL 1000;
 
-Token scanner(const string&, int);
+Token scanner(string&, int);
 char look(string&);
 char getChar(string&);
 int getCol(char);
-Token FSDriver(const string&, int);
+bool kwCheck(string&);
+Token FSDriver(string&, int);
 
 #endif
