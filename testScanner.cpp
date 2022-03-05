@@ -38,10 +38,10 @@ void testScanner(istream& in) {
       //   //if not empty - continue
       //   continue;
       // }
-      cout << "*** In testScanner.cpp after scanner call *** \n";
-      cout << "Token line number: " << token.line << endl;
-      cout << "Token type: " << token.tokenID << endl;
-      cout << "Token : " << token.chars << endl;
+      // cout << "*** In testScanner.cpp after scanner call *** \n";
+      // cout << "Token line number: " << token.line << endl;
+      // cout << "Token type: " << token.tokenID << endl;
+      // cout << "Token : " << token.chars << endl;
     }
 
   }
