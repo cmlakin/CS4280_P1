@@ -21,6 +21,7 @@ void testScanner(istream& in) {
   else if(!in.eof()) {
     cout << "--- in testScanner !eof while loop\n";
     while(getline(in, fileLine)) {
+      cout << "--- in testScanner geline loop\n";
       cout << "fileLine = " << fileLine << endl;
       lineNum++;
       // not sure if I should do this here, or if it should be done below

@@ -32,7 +32,7 @@ Token scanner(string& fileString, int lineN)  {
   cout << "*** In scanner.cpp *** \n";
   Token temp;
 
-  temp = FSDriver(fileString, lineN);
+  //temp = FSDriver(fileString, lineN);
 
   cout << "*** In scanner.cpp after FSDriver call *** \n";
 
@@ -134,7 +134,7 @@ Token FSDriver(string& fileString, int line) // assume nextChar set, and used as
   int state = 0; //INITIAL; // (0 = S1 here)
   int nextState;
   Token token;
-  string s = NULL;
+  string s = "";
   char nextChar = '\0';
   int fsaCol = 0;
 
