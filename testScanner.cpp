@@ -28,6 +28,7 @@ void testScanner(istream& in) {
       //cout << "*** In testScanner.cpp before scanner call *** \n";
 
       while (fileLine.length() > 0) {
+
         // pass line and line number to scanner
         token = scanner(fileLine, lineNum);
         //scanner returns token info - print info
@@ -40,6 +41,7 @@ void testScanner(istream& in) {
         //   continue;
         // }
         //cout << "*** In testScanner.cpp after scanner call *** \n";
+        cout << "*** fileLine.length() = " << fileLine.length() << endl;
         cout << "Token line number: " << token.line << endl;
         cout << "Token type: " << token.tokenID << endl;
         cout << "Token : " << token.chars << endl;
@@ -47,7 +49,6 @@ void testScanner(istream& in) {
         return;
       }
     }
-
   }
 }
 
