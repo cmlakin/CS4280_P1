@@ -2,127 +2,198 @@
 #include "scanner.h"
 
 // store string and call getchar();
+string tokenNames[] = {"Keyword", "Identifier", "EOF", "Number", "Operator",
+                        "Comment"};
+
 // declare FSA table here
-// cosnt int statesRow = 9;
-// cosnt int tokensCol = 8;
-// const int table[statesRow][tokensCol];
+const int statesRow = 9;
+const int tokensCol = 9;
+                                        //  a-z  A-Z   op[]   <     -    0-9   *     EOF    ws
+const int table[statesRow][tokensCol] = { {   1,    3,    4,    5,   -1,    6,    7, 1001,  500},  //0(s0)
+                                          {   2,    2,   -1,   -1,   -1,    2,   -1,   -1,   -1},  //1(s1)
+                                          {   2,    2, 1002, 1002, 1002,    2, 1002, 1002, 1002},  //2(s2)
+                                          {   3, 1003, 1003, 1003, 1003, 1003, 1003, 1003, 1003},  //3(s3)
+                                          {1005, 1005, 1005, 1005, 1005, 1005, 1005, 1005, 1005},  //4(s4)
+                                          {  -1,   -1,   -1,    4,    4,   -1,   -1,   -1,   -1},  //5(s5)
+                                          {1004, 1004, 1004, 1004, 1004,    6, 1004, 1004, 1004},  //6(s6)
+                                          {   7,    7,    7,    7,    7,    7,    8,   -1,    7},  //7(s7)
+                                          {1006, 1006, 1006, 1006, 1006, 1006, 1006, 1006, 1006}}; //8(s8)
+
+
 // string variable
 // static string fileString;
 // nextChar variable
-static char nextChar;
-static char lookAhead;
+// static char nextChar;
+// static int fsaCol;
 // // use this to look at the upcoming nextChar
 // static int lineN;
 
 // pass 2 arguemnts - string and line number
-void scanner(const string& fileString, int lineN)  {
+Token scanner(string& fileString, int lineN)  {
+  // cout << "*** In scanner.cpp *** \n";
+  Token temp;
 
-  string chars = fileString;
-  cout << lineN << " " << chars << endl;
-  while(chars.length() > 1) {
-    cout << "***in scanner string = " << chars << endl;
-    cout << "***char.length() = " << chars.length() << endl;
-    getChar(chars, lineN);
+  temp = FSDriver(fileString, lineN);
+
+  // cout << "*** In scanner.cpp after FSDriver call *** \n";
+
+  return temp;
+
+}
+
+char look(string& str){
+  // cout << "--- in look\n";
+  char lookAhead = '\0';
+
+  if(str.length() > 0) {
+    lookAhead = str.at(0);
+    cout << "lookAhead = " << lookAhead << endl;
+  }
+  else {
+    // do something here
   }
 
-  // initialize FSA table here
-  // table[statesRow][tokensCol] = { {1, 3, 4, 5, -1, 6, 7, 1000},
-  //                                 {2, 2, -1, -1, -1, 2, -1, -1},
-  //                                 {2, 2, 1001, 1001, 1001, 2, 1001, 1001},
-  //                                 {3, 1002, 1002, 1002, 1002, 1002, 1002, 1002},
-  //                                 {1004, 1004, 1004, 1004, 1004, 1004, 1004, 1004},
-  //                                 {-1, -1, -1, 4, 4, -1, -1, -1},
-  //                                 {1003, 1003, 1003, 1003, 1003, 6, 1003, 1003},
-  //                                 {7, 7, 7, 7, 7, 7, 8, -1},
-  //                                 {1005, 1005, 1005, 1005, 1005, 1005, 1005, 1005}};
-  // set up as switch statement
-    /* cases:
-        -is alpha
-            - is upper
-            - is lower
-        -is digit
-        -is operator
-        -is Comment
-        -is EOF
-        */
-
-  // switch(value){
-  //   case KW:
-  //
-  //   case ID:
-  //
-  //   case EOF:
-  //
-  //   case NUM:
-  //
-  //   case OP:
-  //
-  //   case CMT:
-  //
-  //   default:
-  //     // error
-  // }
-
-
-
+  return lookAhead;
 }
 
 // site for string.at() https://www.geeksforgeeks.org/string-at-in-cpp/
 // stie for string.end() https://www.javatpoint.com/cpp-string-end-function
-void getChar(string& s, int lineN) {
+char getChar(string& str) {
+  // cout << "--- in getCahr\n";
+  char next = '\0';
   // parse string for nextChar
-  nextChar = s.at(0);
-  cout << "nextChar = " << nextChar << endl;
-  lookAhead = s.at(1);
-  cout << "lookAhead = " << lookAhead << endl;
+  next = str.at(0);
+  str.erase(0, 1);
+  cout << "string = " << str << endl;
 
-  s.erase(0, 1);
-  cout << "string = " << s << endl;
-
-  // if(s.end()){
-  //   // do something here
-  //   cout << "end of string\n";
-  //   return;
-  // }
-  // else {
-  //
-  // }
+  return next;
 }
 
-// tokenType FSDriver() // assume nextChar set, and used as column index
-// {
-//   state_t state = INITIAL; // (0 = S1 here)
-//   state_t nextState;
-//   tokenType token;
-//   string s = NULL;
-//
-//   while (state != FINAL) {
-//     nextState = Table[state][nextChar];
-//     if (nextState == Error) {
-//       Error(); // report error and exit
-//     }
-//     if (nextState == FINAL) { // put switch here instead of if statement
-//       if (token(state) == ERR){
-//         //error
-//       }
-//       else if (token(state) == KW) { // need reserved keyword loop
-//         if (S in Keywords){
-//           return (KW_tk, S); // or specific keyword
-//         }
-//         else {
-//           //error
-//         }
-//       }
-//       else if (token(state) >= ID && token(state) <= CMT){
-//         // return which token type and string
-//       }
-//       // add additional states
-//       else {  // not FINAL  // this would be the default statement in switch
-//         state := nextState;
-//         append(S, nextChar);
-//         nextChar = getChar(); // something to see if finished with line
-//       }
-//     }
-//   }
-//
-// }
+int getCol(char currentChar){
+  // cout << "--- in get col\n";
+  int colNum = 0;
+  // find FSA column
+
+  if (currentChar == ' '){
+    colNum = 8;
+  }
+  else if (isalpha(currentChar)){
+    if (isupper(currentChar)){
+      colNum = 1;
+    }
+    else {
+      colNum = 0;
+    }
+  }
+  else if (isdigit(currentChar)){
+    colNum = 5;
+  }
+  else {
+    for(int i = 0; i < 7; i++){
+      if (currentChar == operator1[i].at(0)) {
+        colNum = 2;
+      }
+    }
+    if (colNum != 2) {
+      if(currentChar == operator2){
+        colNum = 3;
+      }
+      else if (currentChar == operator3) {
+        colNum = 4;
+      }
+      else if (currentChar == comment){
+        colNum = 6;
+      }
+      else if (currentChar == '\0') {
+        colNum = 7;
+      }
+      else {
+        //error - unknown character error
+        cout << "else/fsaCol: not available column\n";
+      }
+    }
+  }
+  cout << "current Char = " << currentChar << endl;
+  cout << "colNum = " << colNum << endl;
+  return colNum;
+
+}
+
+bool kwCheck(string& str) {
+  int counter = 0;
+  for (int i = 0; i < 14; i++){
+    if (str == keyword[i]) {
+      return true;
+    }
+    else {
+      counter++;
+    }
+  }
+  if (counter == 13){
+    return false;
+  }
+
+}
+
+Token FSDriver(string& fileString, int line) // assume nextChar set, and used as column index
+{
+  // cout << "--- in FSDriver\n";
+  // state_t state = INITIAL; // (0 = S1 here)
+  // state_t nextState;
+  int state = 0; //INITIAL; // (0 = S1 here)
+  int nextState;
+  Token token;
+  string s = "";
+  char nextChar = '\0';
+  int fsaCol = 0;
+
+  token.line = line;
+
+  while (state != FINAL) {
+
+    nextChar = look(fileString);
+    fsaCol = getCol(nextChar);
+    nextState = table[state][fsaCol];
+    cout << "next state = " << nextState << endl;
+    if (nextState < 0) {
+      //Error(); // report error and exit
+    }
+    else if (nextState >= 1000) { // put switch here instead of if statement
+      if (nextState < 0){
+        //error
+        cout << "Error: " << state << endl;
+      }
+      else if (nextState == KW_tk) { // need reserved keyword loop
+        int check = kwCheck(s);
+        if (check) {
+          cout << "KW_TK\n";
+          token.tokenID = nextState;
+          return token; // or specific keyword
+        }
+        else {
+          //error
+          cout << "Error: string not keyword\n";
+        }
+
+      }
+      else if (nextState >= ID_tk && nextState <= CMT_tk){
+        // TODO build out individual token types
+        // return which token type and string
+        cout << "ID - CMT token\n";
+        return token;
+      }
+      // add additional states
+
+    }
+    else {  // not FINAL  // this would be the default statement in switch
+      state = nextState;
+      char addChar = getChar(fileString);
+      cout << "addChar = " << addChar << endl;
+      s = s + addChar;
+      cout << "s = " << s << endl;
+      token.chars = s;
+    }
+  }
+  return token;
+
+}

@@ -4,6 +4,8 @@
 #include <iostream>
 #include <stdlib.h>
 #include <string>
+#include <cctype>
+#include "token.h"
 
 using namespace std;
 
@@ -13,10 +15,15 @@ using namespace std;
 // #define NUM 1003;
 // #define OP 1004;
 // #define CMT 1005;
-// #define ERR -1;
+#define ERR -1
+#define INITIAL 0
+#define FINAL 1000
 
-void scanner(const string&, int);
-void getChar(string&, int);
-// tokenType FSDriver();
+Token scanner(string&, int);
+char look(string&);
+char getChar(string&);
+int getCol(char);
+bool kwCheck(string&);
+Token FSDriver(string&, int);
 
 #endif
