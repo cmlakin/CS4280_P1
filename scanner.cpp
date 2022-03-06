@@ -70,6 +70,7 @@ char getChar(string& str) {
     while (next != '*') {
       cout << "string = " << str << endl;
       str.erase(0, 1);
+      next = str.at(0);
     }
     return next;
   }
