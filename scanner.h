@@ -15,9 +15,9 @@ using namespace std;
 // #define NUM 1003;
 // #define OP 1004;
 // #define CMT 1005;
-#define ERR -1;
-#define INITIAL 0;
-#define FINAL 1000;
+#define ERR -1
+#define INITIAL 0
+#define FINAL 1000
 
 Token scanner(string&, int);
 char look(string&);
