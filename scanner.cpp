@@ -63,8 +63,20 @@ char getChar(string& str) {
   char next = '\0';
   // parse string for nextChar
   next = str.at(0);
-  str.erase(0, 1);
-  cout << "string = " << str << endl;
+  if(next == '*') {
+    cout << "string = " << str << endl;
+    str.erase(0, 1);
+    next = str.at(0);
+    while (next != '*') {
+      cout << "string = " << str << endl;
+      str.erase(0, 1);
+    }
+    return next;
+  }
+  else {
+    str.erase(0, 1);
+    cout << "string = " << str << endl;
+  }
 
   return next;
 }
