@@ -53,7 +53,16 @@ void testScanner(istream& in) {
         }
       }
     }
+
+    // // set when the end of the file has been reached.
+    // token.line = lineNum;
+    // token.tokenID = 1003;
+    // token.chars = "EOF";
+    // cout << "Token line number: " << token.line << endl;
+    // cout << "Token type: " << token.tokenID << endl;
+    // cout << "Token : " << token.chars << endl;
   }
+
   return;
 }
 
