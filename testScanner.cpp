@@ -42,12 +42,15 @@ void testScanner(istream& in) {
           cout << "Exiting program.\n";
           return;
         }
+        else if (token.tokenID == 500) {
+          continue;
+        }
         else {
           cout << "Token line number: " << token.line << endl;
           cout << "Token type: " << token.tokenID << endl;
           cout << "Token : " << token.chars << endl;
         //return;
-      }
+        }
       }
     }
   }

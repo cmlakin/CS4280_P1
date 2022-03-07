@@ -151,7 +151,8 @@ Token FSDriver(string& fileString, int line) // assume nextChar set, and used as
   token.line = line;
 
   while (fileString.length() > 0 && isspace(look(fileString))) {
-    getChar(fileString);
+    char ws = '\0';
+    ws = getChar(fileString);
   }
   if (fileString.length() == 0){
     // end of string
@@ -200,6 +201,8 @@ Token FSDriver(string& fileString, int line) // assume nextChar set, and used as
     }
     else if (nextState == 500) {
       fileString.erase(0);
+      token.tokenID = 500;
+      return token;
     }
     else {  // not FINAL  // this would be the default statement in switch
       state = nextState;
