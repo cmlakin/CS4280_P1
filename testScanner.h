@@ -8,6 +8,7 @@ using namespace std;
 
 
 void testScanner(istream&);
+void printTokenType(int, int, string);
 
 
 #endif

@@ -28,9 +28,14 @@ int main(int argc, char * argv[]) {
     testScanner(inFile);
     inFile.close();
   }
-  // else {
-  //   testScanner(cin);
-  // }
+  else if (argc > 2){
+    cout << "ERROR: Too many arguements entered.\n";
+    cout << "USAGE: ./scanner [filename]\n";
+  }
+  else {
+    cout << "Enter string to check for tokens:\n";
+    testScanner(cin);
+  }
 
   cout << "End of program.\n";
   return 0;

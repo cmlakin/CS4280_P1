@@ -7,17 +7,17 @@ string tokenNames[] = {"Keyword", "Identifier", "EOF", "Number", "Operator",
 
 // declare FSA table here
 const int statesRow = 9;
-const int tokensCol = 9;                //   0    1     2     3     4     5     6    7      8
-                                        //  a-z  A-Z   op[]   <     -    0-9    *    EOF    ws
-const int table[statesRow][tokensCol] = { {   1,    3,    4,    5,   -1,    6,    7, 1003,  500},  //0(s0)
-                                          {   2,    2,   -1,   -1,   -1,    2,   -1,   -1,   -1},  //1(s1)
-                                          {   2,    2, 1002, 1002, 1002,    2, 1002, 1002, 1002},  //2(s2)
-                                          {   3, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001},  //3(s3)
-                                          {1005, 1005, 1005, 1005, 1005, 1005, 1005, 1005, 1005},  //4(s4)
-                                          {  -1,   -1,   -1,    4,    4,   -1,   -1,   -1,   -1},  //5(s5)
-                                          {1004, 1004, 1004, 1004, 1004,    6, 1004, 1004, 1004},  //6(s6)
-                                          {   7,    7,    7,    7,    7,    7,    8,   -1,    7},  //7(s7)
-                                          {1006, 1006, 1006, 1006, 1006, 1006, 1006, 1006, 1006}}; //8(s8)
+const int tokensCol = 10;                //   0    1     2     3     4     5     6    7      8    9
+                                        //  a-z  A-Z   op[]   <     -    0-9    *    EOF    ws   ERR
+const int table[statesRow][tokensCol] = { {   1,    3,    4,    5,   -1,    6,    7, 1003,  500,   -1},  //0(s0)
+                                          {   2,    2,   -1,   -1,   -1,    2,   -1,   -1,   -1,   -1},  //1(s1)
+                                          {   2,    2, 1002, 1002, 1002,    2, 1002, 1002, 1002,   -1},  //2(s2)
+                                          {   3, 1001, 1001, 1001, 1001, 1001, 1001, 1001, 1001,   -1},  //3(s3)
+                                          {1005, 1005, 1005, 1005, 1005, 1005, 1005, 1005, 1005,   -1},  //4(s4)
+                                          {  -1,   -1,   -1,    4,    4,   -1,   -1,   -1,   -1,   -1},  //5(s5)
+                                          {1004, 1004, 1004, 1004, 1004,    6, 1004, 1004, 1004,   -1},  //6(s6)
+                                          {   7,    7,    7,    7,    7,    7,    8,   -1,    7,   -1},  //7(s7)
+                                          {1006, 1006, 1006, 1006, 1006, 1006, 1006, 1006, 1006,   -1}}; //8(s8)
 
 
 // string variable
@@ -109,18 +109,16 @@ int getCol(char currentChar){
       }
       else {
         //error - unknown character error
-        cout << "else/fsaCol: not available column\n";
+        colNum = 9;
       }
     }
   }
-  // cout << "current Char = " << currentChar << endl;
-  // cout << "colNum = " << colNum << endl;
+
   return colNum;
 
 }
 
 bool kwCheck(string& str) {
-  //cout << "---- in kw check -----\n";
   int counter = 0;
   for (int i = 0; i < 14; i++){
     if (str == keyword[i]) {
@@ -167,14 +165,11 @@ Token FSDriver(string& fileString, int line) // assume nextChar set, and used as
     if (nextState < 0) {
       //Error(); // report error and exit
       token.tokenID = nextState;
+      token.chars = nextChar;
       return token;
     }
     else if (nextState >= 1000) { // put switch here instead of if statement
-      if (nextState < 0){
-        //error
-        cout << "Error: " << state << endl;
-      }
-      else if (nextState == KW_tk) { // need reserved keyword loop
+      if (nextState == KW_tk) { // need reserved keyword loop
         //cout << "in FSDriver keyword state\n";
         int check = kwCheck(s);
         if (check) {
@@ -186,6 +181,7 @@ Token FSDriver(string& fileString, int line) // assume nextChar set, and used as
         else {
           //error
           token.tokenID = -2;
+          token.chars = s;
           return token;
         }
 

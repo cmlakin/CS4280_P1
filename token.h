@@ -7,7 +7,7 @@
 using namespace std;
 // enum is going to return a value
 enum tokenId {KW_tk = 1001, ID_tk = 1002, EOF_tk = 1003, NUM_tk = 1004,
-              OP_tk = 1005, CMT_tk = 1006, ERR_tk = -1};
+              OP_tk = 1005, CMT_tk = 1006};
 
 // tokenNames[EOF_tk] -> this will print EOF
 extern string tokenNames[];

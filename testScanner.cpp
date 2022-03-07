@@ -6,26 +6,20 @@
 using namespace std;
 
 void testScanner(istream& in) {
-  // cout << "*** In testScanner.cpp *** \n";
+
   Token token;
   string fileLine;
   int lineNum = 0;
-  // create a variable to store token sent back from scanner
-
-
 
   if (in.eof()) {
     cout << "Error: Empty file, no content.\n";
     cout << "Exiting program.\n";
   }
   else if(!in.eof()) {
-    // cout << "--- in testScanner !eof while loop\n";
+
     while(getline(in, fileLine)) {
-      // cout << "--- in testScanner geline loop\n";
-      cout << "fileLine = " << fileLine << endl;
+
       lineNum++;
-      // not sure if I should do this here, or if it should be done below
-      //cout << "*** In testScanner.cpp before scanner call *** \n";
 
       while (fileLine.length() > 0) {
 
@@ -34,36 +28,53 @@ void testScanner(istream& in) {
         //scanner returns token info - print info
         if (token.tokenID == -1) {
           cout << "ERROR: Invalid character: " << token.chars << endl;
-          cout << "Exiting program.\n";
+          cout << "Exiting program.\n\n";
           return;
         }
         else if (token.tokenID == -2) {
-          cout << "Error: string not keyword. Invalid token: " << token.chars << endl;
-          cout << "Exiting program.\n";
+          cout << "ERROR: Invalid character on line #: "<< token.line << endl;
+          cout << "String not keyword: " << token.chars << endl;
+          cout << "Exiting program.\n\n";
           return;
         }
         else if (token.tokenID == 500) {
           continue;
         }
         else {
-          cout << "Token line number: " << token.line << endl;
-          cout << "Token type: " << token.tokenID << endl;
-          cout << "Token : " << token.chars << endl;
-        //return;
+          printTokenType(token.tokenID, token.line, token.chars);
         }
       }
     }
 
     // // set when the end of the file has been reached.
-    // token.line = lineNum;
-    // token.tokenID = 1003;
-    // token.chars = "EOF";
-    // cout << "Token line number: " << token.line << endl;
-    // cout << "Token type: " << token.tokenID << endl;
-    // cout << "Token : " << token.chars << endl;
+    token.line = lineNum;
+    token.tokenID = 1003;
+    token.chars = "EOF";
+    printTokenType(token.tokenID, token.line, token.chars);
   }
 
   return;
 }
 
-//create a print function to print contents of token passed back from scanner
+void printTokenType(int tkId, int tkLn, string tkStr) {
+  int index = tkId - 1001;
+  cout << "Line number: " << tkLn << endl;
+  cout << tokenNames[index] << ": " << tkStr <<endl;
+
+
+  switch(index) {
+    case 0:  cout << "KW_tk\n\n";
+    break;
+    case 1:  cout << "ID_tk\n\n";
+    break;
+    case 2:  cout << "EOF_tk\n\n";
+    break;
+    case 3:  cout << "NUM_tk\n\n";
+    break;
+    case 4:  cout << "OP_tk\n\n";
+    break;
+    case 5:  cout << "CMT_tk\n\n";
+    break;
+
+  }
+}
