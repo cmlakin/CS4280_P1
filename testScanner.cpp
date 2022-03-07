@@ -22,7 +22,7 @@ void testScanner(istream& in) {
     // cout << "--- in testScanner !eof while loop\n";
     while(getline(in, fileLine)) {
       // cout << "--- in testScanner geline loop\n";
-      // cout << "fileLine = " << fileLine << endl;
+      cout << "fileLine = " << fileLine << endl;
       lineNum++;
       // not sure if I should do this here, or if it should be done below
       //cout << "*** In testScanner.cpp before scanner call *** \n";
@@ -32,24 +32,26 @@ void testScanner(istream& in) {
         // pass line and line number to scanner
         token = scanner(fileLine, lineNum);
         //scanner returns token info - print info
-        //check if line is empty or not
-        // if (fileLine.empty()){
-        //   //if empty - get new line
-        // }
-        // else {
-        //   //if not empty - continue
-        //   continue;
-        // }
-        //cout << "*** In testScanner.cpp after scanner call *** \n";
-        cout << "*** fileLine.length() = " << fileLine.length() << endl;
-        cout << "Token line number: " << token.line << endl;
-        cout << "Token type: " << token.tokenID << endl;
-        cout << "Token : " << token.chars << endl;
-        cout << "fileLine = " << fileLine << endl;
-        return;
+        if (token.tokenID == -1) {
+          cout << "ERROR: Invalid character: " << token.chars << endl;
+          cout << "Exiting program.\n";
+          return;
+        }
+        else if (token.tokenID == -2) {
+          cout << "Error: string not keyword. Invalid token: " << token.chars << endl;
+          cout << "Exiting program.\n";
+          return;
+        }
+        else {
+          cout << "Token line number: " << token.line << endl;
+          cout << "Token type: " << token.tokenID << endl;
+          cout << "Token : " << token.chars << endl;
+        //return;
+      }
       }
     }
   }
+  return;
 }
 
 //create a print function to print contents of token passed back from scanner

@@ -32,6 +32,7 @@ int main(int argc, char * argv[]) {
   //   testScanner(cin);
   // }
 
+  cout << "End of program.\n";
   return 0;
 }
 

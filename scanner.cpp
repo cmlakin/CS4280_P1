@@ -64,7 +64,7 @@ char getChar(string& str) {
   // parse string for nextChar
   next = str.at(0);
   str.erase(0, 1);
-  cout << "remaining string = " << str << endl;
+  //cout << "remaining string = " << str << endl;
 
   return next;
 }
@@ -113,8 +113,8 @@ int getCol(char currentChar){
       }
     }
   }
-  cout << "current Char = " << currentChar << endl;
-  cout << "colNum = " << colNum << endl;
+  // cout << "current Char = " << currentChar << endl;
+  // cout << "colNum = " << colNum << endl;
   return colNum;
 
 }
@@ -150,14 +150,23 @@ Token FSDriver(string& fileString, int line) // assume nextChar set, and used as
 
   token.line = line;
 
+  while (fileString.length() > 0 && isspace(look(fileString))) {
+    getChar(fileString);
+  }
+  if (fileString.length() == 0){
+    // end of string
+  }
+
   while (state != FINAL) {
-    cout << "state = " << state << endl;
+    //cout << "state = " << state << endl;
     nextChar = look(fileString);
     fsaCol = getCol(nextChar);
     nextState = table[state][fsaCol];
-    cout << "next state = " << nextState << endl;
+    //cout << "next state = " << nextState << endl;
     if (nextState < 0) {
       //Error(); // report error and exit
+      token.tokenID = nextState;
+      return token;
     }
     else if (nextState >= 1000) { // put switch here instead of if statement
       if (nextState < 0){
@@ -168,47 +177,36 @@ Token FSDriver(string& fileString, int line) // assume nextChar set, and used as
         //cout << "in FSDriver keyword state\n";
         int check = kwCheck(s);
         if (check) {
-          cout << "KW_TK\n";
+          //cout << "KW_TK\n";
           token.tokenID = nextState;
           token.chars = s;
           return token; // or specific keyword
         }
         else {
           //error
-          cout << "Error: string not keyword. Invalid token.\n";
+          token.tokenID = -2;
           return token;
         }
 
       }
       else if (nextState >= ID_tk && nextState <= CMT_tk){
         // TODO build out individual token types
-        //if (nextState == ID_tk){
-          token.tokenID = nextState;
-          token.chars = s;
-        // }
-        // else if(nextState == NUM_tk){
-        //   token.tokenID = nextState;
-        //   token.chars = s;
-        // }
-        // else if (nextState == OP_tk){
-        //   token.tokenID = nextState;
-        //   token.chars = s;
-        // }
-        // else if (nextState == CMT_tk){
-        //   token.tokenID = nextState;
-        //   token.chars = s;
-        // }
+        token.tokenID = nextState;
+        token.chars = s;
 
         return token;
       }
 
+    }
+    else if (nextState == 500) {
+      fileString.erase(0);
     }
     else {  // not FINAL  // this would be the default statement in switch
       state = nextState;
       char addChar = getChar(fileString);
       //cout << "addChar = " << addChar << endl;
       s = s + addChar;
-      cout << "s = " << s << endl;
+      //cout << "s = " << s << endl;
 
     }
   }
