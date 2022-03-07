@@ -5,7 +5,7 @@ CFLAGS = -g -Wall -std=c++11
 OBJS = main.o testScanner.o scanner.o
 TARGET = P1
 
-P1: $(OBJS)
+scanner: $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o P1
 
 main.o: main.cpp testScanner.h scanner.h token.h
