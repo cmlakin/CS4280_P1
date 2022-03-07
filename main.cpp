@@ -33,7 +33,8 @@ int main(int argc, char * argv[]) {
     cout << "USAGE: ./scanner [filename]\n";
   }
   else {
-    cout << "Enter string to check for tokens:\n";
+    cout << "Enter string to check for tokens.\n";
+    cout << "Enter 'Done' when finished to exit program.\n";
     testScanner(cin);
   }
 

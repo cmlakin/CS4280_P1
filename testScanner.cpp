@@ -11,6 +11,7 @@ void testScanner(istream& in) {
   string fileLine;
   int lineNum = 0;
 
+
   if (in.eof()) {
     cout << "Error: Empty file, no content.\n";
     cout << "Exiting program.\n";
@@ -18,7 +19,7 @@ void testScanner(istream& in) {
   else if(!in.eof()) {
 
     while(getline(in, fileLine)) {
-
+      //cout << "fileLine= " << fileLine << endl;
       lineNum++;
 
       while (fileLine.length() > 0) {
@@ -38,9 +39,19 @@ void testScanner(istream& in) {
           return;
         }
         else if (token.tokenID == 500) {
+          // do not print for whitespace
           continue;
         }
+        else if (token.tokenID == 1006){
+          // do not print for comment
+          continue;
+        }
+        else if (token.tokenID == 1007){
+          cout << "End of input.\nExiting Program.\n";
+          return;
+        }
         else {
+          // print token information
           printTokenType(token.tokenID, token.line, token.chars);
         }
       }
@@ -72,8 +83,6 @@ void printTokenType(int tkId, int tkLn, string tkStr) {
     case 3:  cout << "NUM_tk\n\n";
     break;
     case 4:  cout << "OP_tk\n\n";
-    break;
-    case 5:  cout << "CMT_tk\n\n";
     break;
 
   }

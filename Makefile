@@ -6,7 +6,7 @@ OBJS = main.o testScanner.o scanner.o
 TARGET = P1
 
 scanner: $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o P1
+	$(CC) $(CFLAGS) $(OBJS) -o scanner
 
 main.o: main.cpp testScanner.h scanner.h token.h
 	$(CC) $(CFLAGS) -c main.cpp
